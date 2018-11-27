@@ -5,7 +5,58 @@
 </head>
 <body>
   <script>
- 	// Your JavaScript goes here!
+     	// Your JavaScript goes here!
+      let responses = ["rock", "paper", "scissors"];
+
+      function computerPlay() {
+        return responses[Math.floor(Math.random() * responses.length)]
+      };
+
+      function playRound(playerSelection, computerSelection) {
+        let output;
+        if (
+          // (paper beats rock, rock beats scissors, scissors beats paper
+          (playerSelection === "paper" && computerSelection === "rock") ||
+          (playerSelection === "rock" && computerSelection === "scissors") ||
+          (playerSelection === "scissors" && computerSelection === "paper")
+        ) {
+          output = "You Win! " + playerSelection + " beats " + computerSelection;
+        } else if (
+          (computerSelection === "paper" && playerSelection === "rock") ||
+          (computerSelection === "rock" && playerSelection === "scissors") ||
+          (computerSelection === "scissors" && playerSelection === "paper")
+        ) {
+          output = "You Lose! " + computerSelection + " beats " + playerSelection;
+        } else {
+          output = "It's a Tie!"
+        }
+        return output;
+      };
+
+      function game() {
+        //start scoring
+        let playerScore = 0
+        let computerScore = 0
+        let playerSelection = prompt("rock, paper, or scissors?")
+        let roundOutcome = (playRound(playerSelection, computerPlay()))
+        console.log(roundOutcome)
+        if (roundOutcome.includes("Lose")) {
+          computerScore += 1
+        } else if (roundOutcome.includes("Win")) {
+          playerScore += 1
+        }
+
+        console.log(computerScore)
+        console.log(playerScore)
+
+
+
+      }
+
+
+      // const playerSelection = "rock";
+      // const computerSelection = computerPlay();
+      // console.log(playRound(playerSelection, computerSelection))
 
   </script>
 </body>
