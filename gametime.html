@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Rock Paper Scissors</title>
 </head>
 <body>
+  <html>
+    <p align = "center">
+      open developer console and type "game()" to start playing
+    </p>
+  <html>
   <script>
      	// Your JavaScript goes here!
       let responses = ["rock", "paper", "scissors"];
+
+      function playerPlay() {
+        do {
+          playerSelection = prompt("rock, paper, or scissors?").toLowerCase()
+        } while (
+          (playerSelection !== "rock") && (playerSelection !== "paper") && (playerSelection !== "scissors")
+        )
+        return playerSelection
+      }
 
       function computerPlay() {
         return responses[Math.floor(Math.random() * responses.length)]
@@ -14,6 +28,8 @@
 
       function playRound(playerSelection, computerSelection) {
         let output;
+        console.log(`  you play: ${playerSelection}`)
+        console.log(`  computer plays: ${computerSelection}`)
         if (
           // (paper beats rock, rock beats scissors, scissors beats paper
           (playerSelection === "paper" && computerSelection === "rock") ||
@@ -37,26 +53,22 @@
         //start scoring
         let playerScore = 0
         let computerScore = 0
-        let playerSelection = prompt("rock, paper, or scissors?")
-        let roundOutcome = (playRound(playerSelection, computerPlay()))
-        console.log(roundOutcome)
-        if (roundOutcome.includes("Lose")) {
-          computerScore += 1
-        } else if (roundOutcome.includes("Win")) {
-          playerScore += 1
+
+        for (let i = 0; i < 5; i++) {
+          let roundOutcome = (playRound(playerPlay(), computerPlay()))
+          console.log(roundOutcome)
+
+          if (roundOutcome.includes("Lose")) {
+            computerScore += 1
+          } else if (roundOutcome.includes("Win")) {
+            playerScore += 1
+          }
+
+          console.log(`  Score: You ${playerScore} | Computer: ${computerScore}`)
         }
 
-        console.log(computerScore)
-        console.log(playerScore)
-
-
-
+        console.log(`**Final score** \n  Player: ${playerScore} \n  Computer: ${computerScore}`)
       }
-
-
-      // const playerSelection = "rock";
-      // const computerSelection = computerPlay();
-      // console.log(playRound(playerSelection, computerSelection))
 
   </script>
 </body>
