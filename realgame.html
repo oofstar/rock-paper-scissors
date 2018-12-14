@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+</head>
+<body>
+  <html>
+    <p align = "center">
+      <button class="btn">Rock</button>
+      <button class="btn">Paper</button>
+      <button class="btn">Scissors</button>
+
+    </p>
+  <html>
+  <script>
+     	// Your JavaScript goes here!
+      let responses = ["rock", "paper", "scissors"];
+
+      // function playerPlay() {
+      //   do {
+      //     playerSelection = prompt("rock, paper, or scissors?").toLowerCase()
+      //   } while (
+      //     (playerSelection !== "rock") && (playerSelection !== "paper") && (playerSelection !== "scissors")
+      //   )
+      //   return playerSelection
+      // }
+
+      function computerPlay() {
+        return responses[Math.floor(Math.random() * responses.length)]
+      };
+
+      function playRound(playerSelection, computerSelection) {
+        let output;
+        console.log(`  you play: ${playerSelection}`)
+        console.log(`  computer plays: ${computerSelection}`)
+        if (
+          // (paper beats rock, rock beats scissors, scissors beats paper
+          (playerSelection === "paper" && computerSelection === "rock") ||
+          (playerSelection === "rock" && computerSelection === "scissors") ||
+          (playerSelection === "scissors" && computerSelection === "paper")
+        ) {
+          output = "You Win! " + playerSelection + " beats " + computerSelection;
+        } else if (
+          (computerSelection === "paper" && playerSelection === "rock") ||
+          (computerSelection === "rock" && playerSelection === "scissors") ||
+          (computerSelection === "scissors" && playerSelection === "paper")
+        ) {
+          output = "You Lose! " + computerSelection + " beats " + playerSelection;
+        } else {
+          output = "It's a Tie!"
+        }
+        return output;
+      };
+
+      function game() {
+        //start scoring
+        let playerScore = 0
+        let computerScore = 0
+
+        // for (let i = 0; i < 5; i++) {
+          let roundOutcome = (playRound(playerPlay(), computerPlay()))
+          console.log(roundOutcome)
+
+          if (roundOutcome.includes("Lose")) {
+            computerScore += 1
+          } else if (roundOutcome.includes("Win")) {
+            playerScore += 1
+          }
+
+          console.log(`  Score: You ${playerScore} | Computer: ${computerScore}`)
+        // }
+
+        console.log(`**Final score** \n  Player: ${playerScore} \n  Computer: ${computerScore}`)
+      }
+
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(button =>
+        button.addEventListener('click', (e) => {
+          playRound(e.path[0].innerText, computerPlay());
+        })
+      );
+
+
+  </script>
+</body>
+</html>
