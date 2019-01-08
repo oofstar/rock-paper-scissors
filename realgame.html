@@ -39,7 +39,6 @@
 
       function playRound(playerSelection, computerSelection) {
         let output;
-
         if (
           // (paper beats rock, rock beats scissors, scissors beats paper
           (playerSelection === "paper" && computerSelection === "rock") ||
@@ -63,7 +62,22 @@
           playerScore += 1;
         };
         totalScore.innerText = `SCORE\nPlayer: ${playerScore}\nComputer: ${computerScore}`;
+        checkScore(playerScore, computerScore)
       };
+
+      function checkScore(playerScore, computerScore) {
+        if(playerScore >= 5 || computerScore >= 5) {
+          let winner;
+          if (playerScore > computerScore) {
+            winner = "Player Wins";
+          } else {
+            winner = "Computer Wins";
+          }
+          results.innerText = "";
+          totalScore.innerText = `Game Over\n${winner}`
+        }
+
+      }
 
       const buttons = document.querySelectorAll('button');
       buttons.forEach(button =>
